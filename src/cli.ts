@@ -39,11 +39,13 @@ const start = async () => {
 
 	// Each locale in the store will get its own case + nested switch
 	for (const locale in store) {
+		if (!locale.trim()) continue;
 		data +=
 			`\t\tcase '${locale}':\n` +
 			`\t\t\tswitch (ns) {\n`;
 
 		for (const ns of store[locale]) {
+			if (!ns.trim()) continue;
 			data +=
 				`\t\t\t\tcase '${ns}':\n` +
 				`\t\t\t\t\treturn import('./locales/${locale}/${ns}.json');\n`;
